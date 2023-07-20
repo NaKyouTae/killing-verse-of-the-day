@@ -1,0 +1,7 @@
+.list-item { display: flex; align-items: center; gap: 10px; font-size: 14px; padding: 8px; }
+
+.list-item > .created-at { flex: 2; }
+.list-item > .writer { flex: 0.5; }
+.list-item > .verse { flex: 7; }
+.list-item > .like { flex: 0.5; }
+
