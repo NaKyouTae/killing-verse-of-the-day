@@ -4,10 +4,12 @@
 @import "../styles/font.css";
 @import "../styles/ico.css";
 @import "../styles/common.css";
-@import "../styles/input.css";
+@import "textarea.css";
 @import "../styles/button.css";
 @import "../styles/outstanding.css";
 @import "../styles/list.css";
+@import "../styles/card.css";
+@import "../styles/paging.css";
 
 /* root ----------------------- */
 :root {

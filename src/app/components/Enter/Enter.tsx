@@ -1,9 +1,9 @@
-import Input from "@/app/components/template/Input/Input";
+import Textarea from "@/app/components/template/Textarea/Textarea";
 
 function Enter() {
     return (
         <div className={"input-form"}>
-            <Input />
+            <Textarea />
         </div>
     )
 }

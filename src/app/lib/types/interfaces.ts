@@ -6,3 +6,10 @@ export interface Verse {
     createdAt: number
     updatedAt: number
 }
+
+export interface CardModel {
+    id: string
+    title: string
+    content: string
+    writer: string
+}

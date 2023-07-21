@@ -1,0 +1,5 @@
+.pagination { display: flex; justify-content: right; align-items: center; margin: 4rem 0; }
+.pagination_container { display: flex; justify-content: center; margin-top: 20px; }
+.pagination_button { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; margin: 0 5px; border: 1px solid #ddd; border-radius: 50%; background-color: transparent; color: #333; font-size: 12px; font-weight: bold; cursor: pointer; transition: background-color 0.3s ease; }
+.pagination_button.active { background-color: #0070f3; color: #fff; }
+.pagination_ellipsis { margin: 0 5px; font-size: 12px; font-weight: bold; }

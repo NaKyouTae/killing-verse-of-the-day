@@ -1,6 +1,6 @@
 
 // @ts-ignore
-function Input() {
+function Textarea() {
     const change = (e: any) => {
     };
 
@@ -9,11 +9,11 @@ function Input() {
     }
 
     return (
-        <div className={"input-container"}>
-            <input type="text" />
+        <div className={"textarea-container"}>
+            <textarea />
             <button className={"primary-button"}>응원</button>
         </div>
     );
 };
 
-export default Input;
+export default Textarea;
