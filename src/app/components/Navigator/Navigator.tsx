@@ -1,4 +1,4 @@
-import NavigatorItem from "@/app/components/navigator/NavigatorItem";
+import NavigatorItem from "@/app/components/Navigator/NavigatorItem";
 
 function Navigator() {
     return (

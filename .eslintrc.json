@@ -1,3 +1,11 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "typescript"
+  ],
+  "rules": {
+    "no-unused-vars": "off",
+    "no-var-requires": "off"
+  }
 }

@@ -1,11 +1,13 @@
-function Paging(props: { currentPage: number, totalPages: number, setCurrentPage: any}) {
-    const { currentPage, totalPages, setCurrentPage } = props
+function Paging(props: { currentPage: number, totalPages: number, totalItems: number, itemsPerPage: number, setCurrentPage: any}) {
+    const { currentPage, totalPages, totalItems, itemsPerPage, setCurrentPage } = props
+    const currentItemRangeFrom = ((currentPage - 1) * itemsPerPage) + 1;
+    const currentItemRangeTo = Math.min(currentItemRangeFrom + itemsPerPage - 1, totalItems);
 
     // Render the page number buttons
     const renderPageNumbers = () => {
         const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
 
-        const MAX_VISIBLE_PAGES = 10;
+        const MAX_VISIBLE_PAGES = itemsPerPage;
 
         if (totalPages <= MAX_VISIBLE_PAGES) {
             // Display all page numbers
@@ -56,7 +58,10 @@ function Paging(props: { currentPage: number, totalPages: number, setCurrentPage
     };
 
     return (
-        <div className="pagination">{renderPageNumbers()}</div>
+        <div className="pagination">
+            <div>Viewing items {currentItemRangeFrom} - {currentItemRangeTo} of {totalItems}</div>
+            <div>{renderPageNumbers()}</div>
+        </div>
     )
 }
 

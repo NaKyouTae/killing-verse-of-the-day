@@ -1,17 +1,24 @@
+'use client';
 
 // @ts-ignore
-function Textarea() {
-    const change = (e: any) => {
-    };
+import {useState} from "react";
+import {verseActions} from "@/app/features/slices/verse.slice";
+import {useAppDispatch} from "@/app/hooks";
 
-    const summit = () => {
+function Textarea(props: { summit: any }) {
+    const dispatch = useAppDispatch()
+    const [verse, setVerse] = useState()
 
+    const handlerChange = (e: any) => {
+        const newVerse = e.target.value
+        setVerse(newVerse)
+        dispatch(verseActions.setVerse(newVerse))
     }
 
     return (
         <div className={"textarea-container"}>
-            <textarea />
-            <button className={"primary-button"}>응원</button>
+            <textarea onChange={(e: any) => handlerChange(e)}/>
+            <button className={"primary-button"} onClick={props.summit}>응원</button>
         </div>
     );
 };
