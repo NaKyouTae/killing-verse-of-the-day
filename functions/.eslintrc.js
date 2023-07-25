@@ -32,5 +32,8 @@ module.exports = {
         "no-unused-vars": 0,
         "indent": ["error", 4],
         "max-lines": 0,
+        "no-trailing-spaces": 0,
+        "require-jsdoc": 0,
+        "max-len": ["error", {"code": 150}],
     },
 };

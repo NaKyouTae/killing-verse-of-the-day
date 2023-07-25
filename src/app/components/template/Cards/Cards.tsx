@@ -12,18 +12,19 @@ import {library} from "@fortawesome/fontawesome-svg-core"
 
 library.add(faHeart)
 
-function Cards(props: { data: Verse[] }) {
+function Cards(props: { data: Verse[] | undefined }) {
     const dispatch = useAppDispatch()
     const {data} = props
+    const totalSize = data == undefined ? 0 : data?.length
 
     const cardsPerPage = 10 // Number of posts to display per page
-    const totalPages = Math.ceil(data.length / cardsPerPage) // Total number of pages
+    const totalPages = Math.ceil(totalSize / cardsPerPage) // Total number of pages
     const [currentPage, setCurrentPage] = useState(1) // Current page state
 
     const getCurrentPageCards = () => {
         const startIndex = (currentPage - 1) * cardsPerPage
         const endIndex = startIndex + cardsPerPage
-        return data.slice(startIndex, endIndex)
+        return data?.slice(startIndex, endIndex)
     }
 
     const onChangeLike = () => {
@@ -37,7 +38,7 @@ function Cards(props: { data: Verse[] }) {
 
     const renderCardItems = () => {
         const currentPageCards = getCurrentPageCards()
-        return currentPageCards.map((card) => (
+        return currentPageCards?.map((card) => (
             <div key={card.id} className={"card_body"}>
                 <p className={"verse"}>{card.verse}</p>
                 <span className={"writer"}>{card.writer}</span>
@@ -68,7 +69,7 @@ function Cards(props: { data: Verse[] }) {
                 totalPages={totalPages}
                 setCurrentPage={setCurrentPage}
                 itemsPerPage={cardsPerPage}
-                totalItems={data.length}
+                totalItems={totalSize}
             />
         </div>
     )

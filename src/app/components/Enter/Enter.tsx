@@ -9,7 +9,7 @@ import {VerseRequest} from "@/app/lib/types/requests"
 
 function Enter() {
     const dispatch = useAppDispatch()
-    const [insertTrigger, insertResult] = verseApi.useLazyInsertVerseQuery()
+    const [insertTrigger, insertResult] = verseApi.useLazyInsertQuery()
     const enterVerse = useAppSelector((state) => state.verse.verse)
 
     const summit = () => {
