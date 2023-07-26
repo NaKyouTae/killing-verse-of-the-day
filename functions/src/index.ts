@@ -8,7 +8,7 @@
 
 import {
     buildCorsHeader,
-    convertBody,
+    convertToBody, convertToResponse,
     generateRandomString,
     handleOperator,
 } from "./utils"
@@ -34,7 +34,7 @@ exports.insertVerse = onRequest(async (req: any, res: any) => {
                 return res.status(200).send("ok")
             }
             
-            const body = convertBody(req.body)
+            const body = convertToBody(req.body)
             
             const writeResult = await getFirestore().collection("verses").add({
                 id: generateRandomString(16),
@@ -66,7 +66,9 @@ exports.listVerse = onRequest(async (req: any, res: any) => {
                 return res.status(200).send("ok")
             }
             
-            let query: FirebaseFirestore.Query<FirebaseFirestore.DocumentData> = getFirestore().collection("verses")
+            let query: FirebaseFirestore.Query<FirebaseFirestore.DocumentData> = getFirestore()
+                .collection("verses")
+                .orderBy("createdAt", "desc")
             const filters: pageFilter[] = req.body.filters
             
             filters.forEach((filter) => {
@@ -79,10 +81,8 @@ exports.listVerse = onRequest(async (req: any, res: any) => {
             const list = await query.get()
             const responseArray: any[] = []
             
-            functions.logger.log(`Search Verse list:${list}`)
-            
             list.forEach((verse: any) => {
-                responseArray.push(verse)
+                responseArray.push(convertToResponse(verse))
             })
             
             res.json(responseArray)

@@ -8,7 +8,13 @@ import {Verse} from "@/app/lib/types/interfaces"
 
 function List() {
     const [verse, setVerse] = useState<Verse[]>()
-    const {data, error, isLoading} = verseApi.useListQuery()
+    const {data, error, isLoading} = verseApi.useListQuery({
+        filters: [{
+            field: "createdAt",
+            operator: ">=",
+            value: null,
+        }],
+    })
     
     useEffect(() => {
         if (data) {

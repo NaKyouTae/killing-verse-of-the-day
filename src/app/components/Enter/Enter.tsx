@@ -17,14 +17,12 @@ function Enter() {
         
         const body: VerseRequest = {
             id: null,
-            verse: 'test',
+            verse: enterVerse,
             writer: 'nakyutae',
             like: null,
             createdAt: null,
             updatedAt: null,
         }
-        
-        console.log('body', body)
         
         insertTrigger(body)
             .unwrap()

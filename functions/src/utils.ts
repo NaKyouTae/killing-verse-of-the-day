@@ -19,7 +19,7 @@ export function generateRandomString(length: number): string {
     return result
 }
 
-export function convertBody(body: any): any {
+export function convertToBody(body: any): any {
     let cbody
 
     // 데이터의 타입을 확인하고, JSON 형태의 문자열만 JSON.parse()를 사용하여 변환.
@@ -34,4 +34,14 @@ export function convertBody(body: any): any {
 export function handleOperator(query: any, filter: pageFilter) {
     if (filter.value) return query.where(filter.field, filter.operator, filter.value)
     return query
+}
+
+export function convertToResponse(item: any): any {
+    const data = item.data()
+    console.log(data.createdAt)
+    return {
+        ...data,
+        createdAt: data.createdAt.seconds * 1000,
+        updatedAt: data.updatedAt.seconds * 1000,
+    }
 }

@@ -1,7 +1,7 @@
 import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError} from "@reduxjs/toolkit/query/react"
-import {VerseRequest} from "@/app/lib/types/requests"
+import {ListRequest, VerseRequest} from "@/app/lib/types/requests"
 import {getRuntimeConfig} from "@/app/utils/runtimeConfig"
-import {Verse} from "@/app/lib/types/interfaces"
+import {PageFilter, Verse} from "@/app/lib/types/interfaces"
 
 const baseUrl = getRuntimeConfig().HOST
 
@@ -45,9 +45,10 @@ export const verseApi = createApi({
     refetchOnFocus: true,
     baseQuery: baseQueryWithReAuth,
     endpoints: (builder) => ({
-        list: builder.query<Verse[], void>({
-            query: () => ({
-                method: "GET",
+        list: builder.query<Verse[], ListRequest>({
+            query: body => ({
+                body,
+                method: "POST",
                 url: '/listVerse'
             })
         }),

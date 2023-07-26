@@ -13,3 +13,11 @@ export interface CardModel {
     content: string
     writer: string
 }
+
+export interface PageFilter {
+    field: string
+    operator: operatorType
+    value: any
+}
+
+type operatorType = "==" | ">=" | "<=" | "LIKE"
