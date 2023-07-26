@@ -1,4 +1,10 @@
-import {pageFilter} from "./interfaces"
+import {LogicFunction, PageFilter} from "./interfaces"
+import {HttpsFunction} from "firebase-functions"
+import * as cors from "cors"
+
+const {onRequest} = require("firebase-functions/v2/https")
+const corsHandler = cors({origin: true})
+const functions = require("firebase-functions")
 
 export function buildCorsHeader(res: any) {
     res.header("Access-Control-Allow-Origin", "*")
@@ -31,11 +37,6 @@ export function convertToBody(body: any): any {
     return cbody
 }
 
-export function handleOperator(query: any, filter: pageFilter) {
-    if (filter.value) return query.where(filter.field, filter.operator, filter.value)
-    return query
-}
-
 export function convertToResponse(item: any): any {
     const data = item.data()
     console.log(data.createdAt)
@@ -44,4 +45,51 @@ export function convertToResponse(item: any): any {
         createdAt: data.createdAt.seconds * 1000,
         updatedAt: data.updatedAt.seconds * 1000,
     }
+}
+
+export function initialRequest(req: any, res: any): any {
+    res = buildCorsHeader(res)
+    
+    if (req.method == "OPTIONS") {
+        return res.status(200).send("ok")
+    }
+    
+    return res
+}
+
+export function commonRequest(func: LogicFunction): HttpsFunction {
+    return onRequest(async (req: any, res: any) => {
+        corsHandler(req, res, async () => {
+            try {
+                res = initialRequest(req, res)
+                return await func(req, res);
+            } catch (err: any) {
+                return errorHandler(err, req, res)
+            }
+        })
+    })
+}
+
+export function errorHandler(err: any, req: any, res: any): any {
+    functions.logger.log(`Error Request Body:${req.body}`)
+    functions.logger.log(err.message)
+    
+    return res.status(500).json({
+        status: "error",
+        error: err.message,
+    })
+}
+
+export function operatorHandler(query: any, filters: PageFilter[]) {
+    filters.forEach((filter) => {
+        if (filter.field == "createdAt") {
+            filter.value = new Date(filter.value)
+        }
+        
+        if (filter.value) {
+            query = query.where(filter.field, filter.operator, filter.value)
+        }
+    })
+    
+    return query
 }

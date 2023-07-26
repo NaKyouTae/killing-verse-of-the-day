@@ -59,6 +59,12 @@ export const verseApi = createApi({
                 url: '/insertVerse'
             })
         }),
+        increment: builder.query<Verse, string>({
+            query: id => ({
+                method: "GET",
+                url: `/increment/${id}`,
+            })
+        })
     }),
 });
 
