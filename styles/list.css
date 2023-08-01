@@ -1,2 +1,8 @@
 .list-item { display: flex; align-items: center; gap: 10px; font-size: 14px; padding: 8px; }
 
+.like-btn {
+   cursor: pointer;
+}
+.like-btn:hover {
+   font-weight: bold;
+}

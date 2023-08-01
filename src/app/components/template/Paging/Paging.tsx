@@ -1,7 +1,7 @@
 function Paging(props: { currentPage: number, totalPages: number, totalItems: number, itemsPerPage: number, setCurrentPage: any}) {
     const { currentPage, totalPages, totalItems, itemsPerPage, setCurrentPage } = props
     const startNum = ((currentPage - 1) * itemsPerPage)
-    const currentItemRangeFrom = startNum == 0 ? 0 : startNum + 1;
+    const currentItemRangeFrom = startNum == 0 ? 1 : startNum + 1;
     const currentItemRangeTo = Math.min(currentItemRangeFrom + itemsPerPage - 1, totalItems);
 
     // Render the page number buttons

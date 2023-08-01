@@ -35,23 +35,31 @@ function Cards(props: { data: Verse[] | undefined }) {
             dispatch(verseActions.increment())
         }
     }
+    
+    const onUpdate = () => {
+    
+    }
+    
+    const onDelete = () => {
+    
+    }
 
     const renderCardItems = () => {
         const currentPageCards = getCurrentPageCards()
         return currentPageCards?.map((card) => (
-            <div key={card.id} className={"card_body"}>
+            <div key={card.id} className={"card-body"}>
+                <div className={"card-header"}>
+                    <div className={"click-btn"} onClick={onUpdate}>update</div>
+                    <div className={"click-btn"} onClick={onDelete}>delete</div>
+                </div>
                 <p className={"verse"}>{card.verse}</p>
                 <span className={"writer"}>{card.writer}</span>
                 <span className={"like"}>
                     {
                         true ? (
-                            <a onClick={onChangeLike}>
-                                <FontAwesomeIcon icon={faHeart} size={"2xl"} color={"red"} />
-                            </a>
+                            <a className={"click-btn"} onClick={onChangeLike}>좋았음</a>
                         ) : (
-                            <a onClick={onChangeLike}>
-                                <FontAwesomeIcon icon={faHeart} size={"2xl"} />
-                            </a>
+                            <a onClick={onChangeLike}>좋음</a>
                         )
                     }
                     <span>{card.like}</span>
@@ -63,7 +71,7 @@ function Cards(props: { data: Verse[] | undefined }) {
 
     return (
         <div>
-            <div className={"card_container"}>{renderCardItems()}</div>
+            <div className={"card-container"}>{renderCardItems()}</div>
             <Paging
                 currentPage={currentPage}
                 totalPages={totalPages}

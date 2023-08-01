@@ -9,7 +9,7 @@ const initialState = {
     like: 0,
     createdAt: 0,
     updatedAt: 0,
-} as Verse;
+}
 
 export const slice = createSlice({
     name: "verse",
@@ -33,7 +33,6 @@ const state = (state: RootState): Verse => state.verse
 export const verseActions = slice.actions
 
 // selector
-export const selectorLikeOfVerse = createSelector(state, state => state.like)
 export const selectVerse = createSelector(state, state => state.verse)
 
 export const verseReducer = slice.reducer

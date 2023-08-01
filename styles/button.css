@@ -8,3 +8,10 @@
     font-weight: bold;
     font-size: 14px;
 }
+
+.click-btn {
+    cursor: pointer;
+}
+.click-btn:hover {
+    font-weight: bold;
+}
