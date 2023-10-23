@@ -3,7 +3,7 @@
 import Textarea from "@/app/components/template/Textarea/Textarea"
 import {useAppDispatch, useAppSelector} from "@/app/hooks"
 import {verseApi} from "@/app/features/apis/verse.api"
-import {VerseRequest} from "@/app/lib/types/requests"
+import {VerseInsertRequest} from "@/app/lib/types/requests"
 import {verseDefaultRequestParam, verseListRqDefaultParam} from "@/app/lib/types/model"
 import {verseActions} from "@/app/features/slices/verse.slice"
 import {verseListActions} from "@/app/features/slices/verse-list.slice"
@@ -15,7 +15,7 @@ function Enter() {
     const enterVerse = useAppSelector((state) => state.verse.verse)
     
     const summit = () => {
-        const body: VerseRequest = {
+        const body: VerseInsertRequest = {
             ...verseDefaultRequestParam,
             verse: enterVerse,
             // FIXME: 실제 사용자 이름으로 변경

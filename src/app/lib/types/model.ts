@@ -1,4 +1,4 @@
-import {ListRequest, VerseRequest} from "@/app/lib/types/requests"
+import {ListRequest, VerseInsertRequest} from "@/app/lib/types/requests"
 
 export const verseListRqDefaultParam: ListRequest = {
     filters: [{
@@ -9,7 +9,7 @@ export const verseListRqDefaultParam: ListRequest = {
 }
 
 
-export const verseDefaultRequestParam: VerseRequest = {
+export const verseDefaultRequestParam: VerseInsertRequest = {
     id: null,
     verse: '',
     writer: '',

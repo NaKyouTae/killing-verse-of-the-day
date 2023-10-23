@@ -1,5 +1,5 @@
 import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError} from "@reduxjs/toolkit/query/react"
-import {ListRequest, VerseRequest} from "@/app/lib/types/requests"
+import {ListRequest, VerseInsertRequest, VerseUpdateRequest} from "@/app/lib/types/requests"
 import {getRuntimeConfig} from "@/app/utils/runtimeConfig"
 import {PageFilter, Verse} from "@/app/lib/types/interfaces"
 
@@ -52,11 +52,24 @@ export const verseApi = createApi({
                 url: '/listVerse'
             })
         }),
-        insert: builder.query<any, VerseRequest>({
+        insert: builder.query<any, VerseInsertRequest>({
             query: body => ({
                 body,
                 method: "POST",
                 url: '/insertVerse'
+            })
+        }),
+        update: builder.query<any, VerseUpdateRequest>({
+            query: body => ({
+                body,
+                method: "POST",
+                url: '/updateVerse'
+            })
+        }),
+        delete: builder.query<any, string>({
+            query: id => ({
+                method: "GET",
+                url: `/deleteVerse/${id}`
             })
         }),
         increment: builder.query<Verse, string>({

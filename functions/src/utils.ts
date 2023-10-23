@@ -39,7 +39,6 @@ export function convertToBody(body: any): any {
 
 export function convertToResponse(item: any): any {
     const data = item.data()
-    console.log(data.createdAt)
     return {
         ...data,
         createdAt: data.createdAt.seconds * 1000,
@@ -80,8 +79,8 @@ export function errorHandler(err: any, req: any, res: any): any {
     })
 }
 
-export function operatorHandler(query: any, filters: PageFilter[]) {
-    filters.forEach((filter) => {
+export function operatorHandler(query: any, filters?: PageFilter[]) {
+    filters?.forEach((filter) => {
         if (filter.field == "createdAt") {
             filter.value = new Date(filter.value)
         }
@@ -92,4 +91,18 @@ export function operatorHandler(query: any, filters: PageFilter[]) {
     })
     
     return query
+}
+
+export function getDocumentById(items: any[], id: string): any {
+    let docId = null
+    
+    items.forEach((item: any) => {
+        const data = item.data()
+        
+        if (data.id === id) {
+            docId = item.id
+        }
+    })
+    
+    return docId
 }
